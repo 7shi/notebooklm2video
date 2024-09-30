@@ -38,8 +38,8 @@ flista = "dst3-a2.txt"
 tempa  = "dst3-a2.aac"
 output = "dst4.mp4"
 
-i = 0
-imgs = {}
+imgs = { 0: f"{srcdir}/001.png" }
+i = 1
 for j, (_, t1, _, _) in enumerate(table2):
     if not (m := re.match(r"(\d+):(\d+)", t1)):
         print("Error in table2:", t1)
@@ -51,7 +51,7 @@ for j, (_, t1, _, _) in enumerate(table2):
         if m := re.match(r"(\d+):(\d+)", t3):
             t4 = int(m[1]) * 60 + int(m[2])
             if t2 == t4:
-                # print(f"{j} => {i}: {r}")
+                # print(f"{j} => {i}: {t3}")
                 imgs[i] = f"{srcdir}/{j+2:03d}.png"
                 found = True
             elif t2 < t4:
