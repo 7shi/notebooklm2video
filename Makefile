@@ -15,7 +15,7 @@ convert2: log1.py log2.py
 extract:
 	$(PYTHON) $(SCRDIR)/extract-table.py log1.md "| timecode | speaker | caption |" > table0.txt
 	$(PYTHON) $(SCRDIR)/extract-table.py log1.md "| 時間 | 話者 | 英語 | 日本語訳 | 注釈 |" > table1.txt
-	$(PYTHON) $(SCRDIR)/extract-table.py log2.md "| No | Time | Theme | First Utterance |" > table2.txt
+	$(PYTHON) $(SCRDIR)/extract-table.py log2.md "| No | Time | Theme | Illustration Description |" > table2.txt
 
 check:
 	$(PYTHON) $(SCRDIR)/check-table.py table0.txt table1.txt

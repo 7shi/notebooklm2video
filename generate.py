@@ -40,18 +40,27 @@ output = "dst4.mp4"
 
 i = 0
 imgs = {}
-for j, (_, _, _, rem) in enumerate(table2):
-    rem = rem[:20]
+for j, (_, t1, _, _) in enumerate(table2):
+    if not (m := re.match(r"(\d+):(\d+)", t1)):
+        print("Error in table2:", t1)
+        continue
+    t2 = int(m[1]) * 60 + int(m[2])
     found = False
     while not found and i < len(table1) - 1:
-        r = table1[i][2]
-        if r.startswith(rem):
-            # print(f"{j} => {i}: {r}")
-            imgs[i] = f"{srcdir}/{j+2:03d}.png"
-            found = True
+        t3 = table1[i][0]
+        if m := re.match(r"(\d+):(\d+)", t3):
+            t4 = int(m[1]) * 60 + int(m[2])
+            if t2 == t4:
+                # print(f"{j} => {i}: {r}")
+                imgs[i] = f"{srcdir}/{j+2:03d}.png"
+                found = True
+            elif t2 < t4:
+                break
+        else:
+            print("Error in table1:", t3)
         i += 1
     if not found:
-        print(f"Not found: {rem}")
+        print("Not found:", t1)
         break
 
 with open("table.js", "w") as f1:
