@@ -1,0 +1,33 @@
+SCRDIR = ..
+PYTHON = python
+
+all: blank5.wav blank2.wav
+
+mp3:
+	ffmpeg -i src.wav -vn -ac 1 -ar 44100 -ab 128k -acodec libmp3lame -f mp3 src.mp3
+
+extract:
+	$(PYTHON) $(SCRDIR)/extract-table.py log1.md "| timecode | speaker | caption |" > table0.txt
+	$(PYTHON) $(SCRDIR)/extract-table.py log1.md "| 時間 | 話者 | 英語 | 日本語訳 | 注釈 |" > table1.txt
+	$(PYTHON) $(SCRDIR)/extract-table.py log2.md "| No | Time | Theme | First Utterance |" > table2.txt
+
+check:
+	$(PYTHON) $(SCRDIR)/check-table.py table0.txt table1.txt
+	diff -u table0_.txt table1_.txt
+
+rename:
+	$(PYTHON) $(SCRDIR)/rename.py src
+
+resize:
+	$(PYTHON) $(SCRDIR)/resize.py -o dst1 src
+
+generate:
+	$(PYTHON) $(SCRDIR)/generate.py
+
+capture:
+	$(PYTHON) $(SCRDIR)/capture.py
+
+cut:
+	ffmpeg -i dst4.mp4 -ss 00:00:02 -to 00:02:02 dst4-cut.mp4
+
+.PHONY: all mp3 extract check rename resize generate capture cut

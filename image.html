@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>画像と字幕を切り替えるHTML</title>
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    color: white;
+    background-color: black;
+}
+.container {
+    position: relative;
+    width: 800px;
+}
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 600px;
+}
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+.text-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+}
+.text-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 10px;
+}
+.text {
+    color: white;
+    text-shadow: 
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000;
+}
+.text0 {
+    font-size: 48px !important;
+}
+.text1 {
+    font-size: 30px;
+}
+.text2 {
+    font-size: 26px;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+.control-button {
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 5rem;
+}
+.control-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="image-container">
+        <!-- 80, 226, 800, 600 -->
+        <img id="mainImage" src="" alt="メイン画像" class="image">
+        <div class="text-overlay">
+            <div class="text-section"><div class="text text1" id="text1"></div></div>
+            <div class="text-section"><div class="text text1" id="text2"></div></div>
+            <div class="text-section"><div class="text text2" id="text3"></div></div>
+        </div>
+    </div>
+    <div class="controls">
+        <button class="control-button" id="topButton">◀◀</button>
+        <button class="control-button" id="prevButton">◀</button>
+        <button class="control-button" id="nextButton">▶</button> <!-- 526, 864 -->
+        <button class="control-button" id="lastButton">▶▶</button>
+    </div>
+    <div id="index" class="controls">0 / 0</div>
+</div>
+
+<script src="table.js"></script>
+<script>
+const textElements = [text1, text2, text3];
+let currentIndex = 0;
+
+function setContent(elem, text) {
+    elem.innerHTML = "";
+    function addSpan(text) {
+        const spans = text.split("*");
+        for (let i = 0; i < spans.length; i++) {
+            const span = document.createElement('span');
+            if (i & 1) {
+                span.style.fontStyle = 'italic';
+            }
+            span.textContent = spans[i];
+            elem.appendChild(span);
+        }
+    }
+    const lines = text.split("<br>");
+    for (let i = 0; i < lines.length; i++) {
+        if (i > 0) {
+            elem.appendChild(document.createElement('br'));
+        }
+        addSpan(lines[i]);
+    }
+}
+
+function updateContent() {
+    if (currentIndex == 0) {
+        for (let i = 0; i < textElements.length - 1; i++) {
+            textElements[i].classList.add('text0');
+        }
+    } else {
+        for (let i = 0; i < textElements.length - 1; i++) {
+            textElements[i].classList.remove('text0');
+        }
+    }
+    const currentData = table[currentIndex];
+    mainImage.src = currentData[0];
+    for (let i = 0; i < textElements.length; i++) {
+        setContent(textElements[i], currentData[i + 1]);
+    }
+    topButton .disabled = prevButton.disabled = currentIndex === 0;
+    lastButton.disabled = nextButton.disabled = currentIndex === table.length - 1;
+    index.textContent = `${currentIndex + 1} / ${table.length}`;
+}
+
+function setCurrent(index) {
+    if (index < 0 || index >= table.length || index == currentIndex) {
+        return;
+    }
+    currentIndex = index;
+    updateContent();
+}
+
+topButton .addEventListener('click', () => setCurrent(0));
+prevButton.addEventListener('click', () => setCurrent(currentIndex - 1));
+nextButton.addEventListener('click', () => setCurrent(currentIndex + 1));
+lastButton.addEventListener('click', () => setCurrent(table.length - 1));
+
+// 初期表示
+updateContent();
+</script>
+</body>
+</html>
