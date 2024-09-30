@@ -8,7 +8,7 @@ def convert(history):
             if h["role"] == "user":
                 markdown_text += f"# Prompt\n\n{text}\n\n"
             elif h["role"] == "model":
-                markdown_text += f"model:\n{text}\n\n"
+                markdown_text += f"model:  \n{text}\n\n"
     # Combine consecutive blank lines into one
     markdown_text = re.sub(r"\n{3,}", "\n\n", markdown_text)
     return markdown_text.rstrip() + "\n"

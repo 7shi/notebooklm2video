@@ -6,7 +6,7 @@ Please transcribe this conversation, in the table format of timecode, speaker, c
 |---|---|---|
 |00:00|A|text|
 
-model:
+model:  
 Okay, here's the conversation transcribed in the table format you requested:
 
 | timecode | speaker | caption |
@@ -77,7 +77,7 @@ I hope this is helpful! Let me know if you have any other questions.
 |---|---|---|---|----|
 |00:00|A|text|テキスト|word: 単語。|
 
-model:
+model:  
 わかりました。00:00から02:30までの英文を日本語に翻訳し、英語の難解な表現には語釈を付けます。背景説明は省きます。
 
 | 時間 | 話者 | 英語 | 日本語訳 | 注釈 |
@@ -110,7 +110,7 @@ model:
 
 02:34から04:53まで日本語に翻訳してください。英語で難解な表現に語釈を付け、背景説明は不要です。
 
-model:
+model:  
 承知いたしました。02:34から04:53までの英文を日本語に翻訳し、英語の難解な表現には語釈を付けます。背景説明は省きます。
 
 | 時間 | 話者 | 英語 | 日本語訳 | 注釈 |
@@ -140,7 +140,7 @@ model:
 
 05:07から最後まで日本語に翻訳してください。英語で難解な表現に語釈を付け、背景説明は不要です。
 
-model:
+model:  
 承知いたしました。05:07から最後の部分までを日本語に翻訳し、英語の難解な表現には語釈を付けます。背景説明は省きます。
 
 | 時間 | 話者 | 英語 | 日本語訳 | 注釈 |

@@ -60,7 +60,7 @@
 
 これは『異邦人』について話す台本です。Meursaultはムルソーです。
 
-model:
+model:  
 ## 『異邦人』についての会話：台本分析
 
 この台本は、アルベール・カミュの小説『異邦人』について、AとBの二人の人物が議論する様子を記録したものです。以下に、台本から読み取れる内容と、議論のポイントをまとめます。
@@ -98,7 +98,7 @@ model:
 
 話されているテーマを、タイムライン順にリストアップしてください。
 
-model:
+model:  
 ## 『異邦人』についての会話：テーマのタイムライン
 
 以下のリストは、台本の中で議論されているテーマを、会話のタイムライン順に整理したものです。
@@ -162,7 +162,7 @@ model:
 |---:|----|----|
 |1|00:00|(text)|
 
-model:
+model:  
 ## 『異邦人』会話のテーマ：表形式
 
 | No | 時間 | テーマ | 詳細 |
@@ -207,7 +207,7 @@ model:
 
 テーマが多すぎます。2～4個ずつ統合して、15個程度に絞り込んでください。
 
-model:
+model:  
 ## 『異邦人』会話のテーマ：統合版 (15個)
 
 | No | 時間 | テーマ | 詳細 |
@@ -238,7 +238,7 @@ model:
 |----|----|----|----|
 |1|00:00|(text)|(text)|
 
-model:
+model:  
 Here's the table with the first utterances for each theme, translated into English:
 
 | No | Time | Theme | First Utterance |
@@ -265,7 +265,7 @@ This table now provides the opening lines for each thematic section in English, 
 
 全体の流れを考慮して、タイトル画像の案を5つ考えてください。プロンプト形式や箇条書きではなく、50語程度の英語の文章として指示を書いてください。
 
-model:
+model:  
 Here are five title image ideas for a video discussing Albert Camus' *The Stranger*, considering the overall flow of the conversation:
 
 1. **A stark, minimalist image:** A single, intense beam of sunlight piercing through a dark, almost oppressive sky, symbolizing the oppressive sun and the existential darkness explored in the novel.  This reflects the book's bleak yet powerful atmosphere.
