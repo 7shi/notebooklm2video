@@ -263,6 +263,35 @@ This table now provides the opening lines for each thematic section in English, 
 
 # Prompt
 
+テーマごとに挿絵を考えてください。人物はクローズアップしないでください。挿絵はプロンプト形式ではなく、英語で文章化してください。結果は表形式で出力してください。
+
+|No|時間|テーマ|挿絵|
+|----|----|----|----|
+|1|00:00.00|(text)|...|
+
+model:  
+| No | Time | Theme | Illustration Description |
+|----|----|----|----|
+| 1 | 0:00 - 0:39 | Meursault's Indifference and Lack of Emotion | A blurry, indistinct image of a seaside town, possibly Algiers.  The focus is not on people, but on the vastness of the sky and sea, emphasizing the feeling of insignificance and detachment.  Muted, desaturated colors dominate. |
+| 2 | 0:39 - 1:40 | Absurdity and Societal Expectations | A crowded, bustling street scene, possibly a funeral procession in the distance, but largely out of focus. The viewer's attention is drawn to the incongruity of the scene – a jarring mix of emotions and actions, representing the chaotic nature of societal expectations. |
+| 3 | 1:50 - 2:27 | Symbolism of the Sun and Human Powerlessness | A close-up shot of the harsh, unrelenting sun beating down on a barren, sandy landscape.  The vastness of the sky and the intense brightness overwhelm the viewer, evoking a sense of powerlessness against the forces of nature. |
+| 4 | 2:27 - 2:58 | The Murder and its Motive | A hazy, indistinct beach scene. The figures are silhouetted, almost lost in the brightness of the sun and the vastness of the beach, emphasizing the ambiguity and lack of clarity surrounding the murder. |
+| 5 | 2:58 - 3:50 | The Trial and Societal Hypocrisy | A courtroom scene, but instead of focusing on the judge or defendant, the image emphasizes the expressions and body language of the jury, highlighting their judgmental attitudes and biases. |
+| 6 | 3:50 - 4:09 | Individuality and Conformity to Society | A field of wheat swaying gently in the breeze, with a single, slightly out-of-place plant or weed standing apart, representing the tension between individuality and conformity. |
+| 7 | 4:09 - 4:53 | Challenging and Critiquing Social Order | A stark image of a formal, rigid structure (like a building or a set of laws) cracking and crumbling, highlighting the fragility of established social order. |
+| 8 | 4:53 - 5:07 | The Meaning of Human Existence and Absurdity | A vast, empty desert stretching to the horizon under a star-filled night sky. The immensity of the landscape emphasizes the insignificance of human existence in the face of the vast universe. |
+| 9 | 5:07 - 5:50 | Salamano and the Dog: Empathy and Understanding | A blurry, out-of-focus image of a man and a dog, sitting together. The lack of clear detail emphasizes the connection between them, without necessarily depicting the man's mistreatment of the dog. |
+| 10 | 5:50 - 6:32 | Prison Enlightenment and Self-Acceptance | A single, barred window overlooking a simple, unadorned prison wall.  The light filtering through the bars symbolizes a glimmer of hope and inner peace. |
+| 11 | 6:32 - 7:00 | Acceptance of the Absurd and the Meaning of Life | An abstract image of swirling colors and shapes, representing the chaotic and unpredictable nature of life. |
+| 12 | 7:00 - 7:13 | Beauty and Joy in the Everyday | A close-up shot of simple, everyday objects – a cup of coffee, a flower, a book – bathed in soft, warm light, highlighting the beauty to be found in the mundane. |
+| 13 | 7:13 - 7:22 | Inner Strength and Hope | A single, strong tree standing alone on a windswept hill. The tree's resilience symbolizes inner strength in the face of adversity. |
+| 14 | 7:22 - 7:33 | Self-Discovery and Truth | A mirror reflecting a blurred, uncertain image, suggesting the ongoing process of self-discovery. |
+| 15 | 7:33 - 7:52 | Growth and Hope | A single seed sprouting from the earth, reaching towards the sun. The delicate sprout represents the potential for growth and hope despite adversity. |
+
+This revised table provides more evocative and visually descriptive illustrations for each theme, maintaining a focus on atmosphere and symbolism rather than specific character depictions.
+
+# Prompt
+
 全体の流れを考慮して、タイトル画像の案を5つ考えてください。プロンプト形式や箇条書きではなく、50語程度の英語の文章として指示を書いてください。
 
 model:  
