@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>画像と字幕を切り替えるHTML</title>
+<title>notebooklm2video</title>
 <style>
 body, html {
     margin: 0;
@@ -85,8 +85,7 @@ body, html {
 <body>
 <div class="container">
     <div class="image-container">
-        <!-- 80, 226, 800, 600 -->
-        <img id="mainImage" src="" alt="メイン画像" class="image">
+        <img id="mainImage" src="" alt="メイン画像" class="image"> <!-- rect -->
         <div class="text-overlay">
             <div class="text-section"><div class="text text1" id="text1"></div></div>
             <div class="text-section"><div class="text text1" id="text2"></div></div>
@@ -96,7 +95,7 @@ body, html {
     <div class="controls">
         <button class="control-button" id="topButton">⏮</button>
         <button class="control-button" id="prevButton">◀</button>
-        <button class="control-button" id="nextButton">▶</button> <!-- 526, 864 -->
+        <button class="control-button" id="nextButton">▶</button> <!-- mx, my -->
         <button class="control-button" id="lastButton">⏭</button>
     </div>
     <div id="index" class="controls">0 / 0</div>
@@ -162,7 +161,6 @@ prevButton.addEventListener('click', () => setCurrent(currentIndex - 1));
 nextButton.addEventListener('click', () => setCurrent(currentIndex + 1));
 lastButton.addEventListener('click', () => setCurrent(table.length - 1));
 
-// 初期表示
 updateContent();
 </script>
 </body>
