@@ -1,7 +1,7 @@
 SCRDIR = ..
 PYTHON = python
 
-all: blank5.wav blank2.wav
+all:
 
 mp3:
 	ffmpeg -i src.wav -vn -ac 1 -ar 44100 -ab 128k -acodec libmp3lame -f mp3 src.mp3
