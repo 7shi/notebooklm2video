@@ -61,12 +61,12 @@ if not table1[0][1]:
 
 # Add the ending screen if the last entry is not it
 if "".join(table1[-1][1:]):
-    t1 = table1[-1][0]
-    if (t1s := parse_time(t1, " in table1")) is not None:
-        t1s += 5  # dummy time
-        r = [""] * len(table1[0])
-        r[0] = f"{t1s // 60}:{t1s % 60:02d}"
-        table1.append(r)
+    import wave
+    with wave.open("src.wav", 'rb') as wf:
+        t1s = wf.getnframes() // wf.getframerate()
+    r = [""] * len(table1[0])
+    r[0] = f"{t1s // 60}:{t1s % 60:02d}"
+    table1.append(r)
 
 for j, (_, t2, _, _) in enumerate(table2):
     if (t2s := parse_time(t2, " in table2")) is None:
