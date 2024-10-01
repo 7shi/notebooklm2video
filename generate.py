@@ -38,8 +38,14 @@ flista = "dst3-a2.txt"
 tempa  = "dst3-a2.aac"
 output = "dst4.mp4"
 
-imgs = { 0: f"{srcdir}/001.png" }
-i = 1
+imgs = {}
+i = 0
+
+# Determine if the first entry is a title based on the speaker column
+if not table1[0][1]:
+    imgs[0] = f"{srcdir}/001.png"
+    i = 1
+
 for j, (_, t1, _, _) in enumerate(table2):
     if not (m := re.match(r"(\d+):(\d+)", t1)):
         print("Error in table2:", t1)
