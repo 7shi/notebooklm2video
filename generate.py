@@ -46,27 +46,27 @@ if not table1[0][1]:
     imgs[0] = f"{srcdir}/001.png"
     i = 1
 
-for j, (_, t1, _, _) in enumerate(table2):
-    if not (m := re.match(r"(\d+):(\d+)", t1)):
-        print("Error in table2:", t1)
+for j, (_, t2, _, _) in enumerate(table2):
+    if not (m := re.match(r"(\d+):(\d+)", t2)):
+        print("Error in table2:", t2)
         continue
-    t2 = int(m[1]) * 60 + int(m[2])
+    t2s = int(m[1]) * 60 + int(m[2])
     found = False
     while not found and i < len(table1) - 1:
-        t3 = table1[i][0]
-        if m := re.match(r"(\d+):(\d+)", t3):
-            t4 = int(m[1]) * 60 + int(m[2])
-            if t2 == t4:
+        t1 = table1[i][0]
+        if m := re.match(r"(\d+):(\d+)", t1):
+            t1s = int(m[1]) * 60 + int(m[2])
+            if t2s == t1s:
                 # print(f"{j} => {i}: {t3}")
                 imgs[i] = f"{srcdir}/{j+2:03d}.png"
                 found = True
-            elif t2 < t4:
+            elif t2s < t1s:
                 break
         else:
-            print("Error in table1:", t3)
+            print("Error in table1:", t1)
         i += 1
     if not found:
-        print("Not found:", t1)
+        print("Not found:", t2)
         break
 
 with open("table.js", "w") as f1:
