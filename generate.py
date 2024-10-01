@@ -38,6 +38,19 @@ flista = "dst3-a2.txt"
 tempa  = "dst3-a2.aac"
 output = "dst4.mp4"
 
+def parse_time(t, loc="", use_float=False):
+    if use_float:
+        if r := re.match(r"(\d+):(\d+):(\d+\.\d+)", t):
+            return int(r[1]) * 3600 + int(r[2]) * 60 + float(r[3])
+        if r := re.match(r"(\d+):(\d+\.\d+)", t):
+            return int(r[1]) * 60 + float(r[2])
+    if r := re.match(r"(\d+):(\d+):(\d+)", t):
+        return int(r[1]) * 3600 + int(r[2]) * 60 + int(r[3])
+    if r := re.match(r"(\d+):(\d+)", t):
+        return int(r[1]) * 60 + int(r[2])
+    print(f"Error{loc}: {t}")
+    return None
+
 imgs = {}
 i = 0
 
@@ -47,23 +60,18 @@ if not table1[0][1]:
     i = 1
 
 for j, (_, t2, _, _) in enumerate(table2):
-    if not (m := re.match(r"(\d+):(\d+)", t2)):
-        print("Error in table2:", t2)
+    if (t2s := parse_time(t2, " in table2")) is None:
         continue
-    t2s = int(m[1]) * 60 + int(m[2])
     found = False
     while not found and i < len(table1) - 1:
         t1 = table1[i][0]
-        if m := re.match(r"(\d+):(\d+)", t1):
-            t1s = int(m[1]) * 60 + int(m[2])
-            if t2s == t1s:
-                # print(f"{j} => {i}: {t3}")
+        if (t1s := parse_time(t1, " in table1")) is not None:
+            if t1s == t2s:
+                # print(f"{j} => {i}: {t1}")
                 imgs[i] = f"{srcdir}/{j+2:03d}.png"
                 found = True
-            elif t2s < t1s:
+            elif t1s > t2s:
                 break
-        else:
-            print("Error in table1:", t1)
         i += 1
     if not found:
         print("Not found:", t2)
@@ -82,12 +90,8 @@ print("generated: table.js")
 
 times = []
 for t1, *_ in table1:
-    if r := re.match(r"(\d+):(\d+\.\d+)", t1):
-        times.append(int(r[1]) * 60 + float(r[2]))
-    elif r := re.match(r"(\d+):(\d+)", t1):
-        times.append(int(r[1]) * 60 + int(r[2]))
-    else:
-        print(f"Error: {t1}")
+    if (t1s := parse_time(t1, " in table1", True)) is not None:
+        times.append(t1s)
 times[0] -= 5
 times[1] -= 1
 
