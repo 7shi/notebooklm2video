@@ -1,8 +1,12 @@
 import sys, os
 
 args = sys.argv[1:]
+start = 1
+if len(args) > 1 and args[0] == "-s":
+    start = int(args[1])
+    args = args[2:]
 if len(args) != 1:
-    print(f"Usage: python {sys.argv[0]} <directory>", file=sys.stderr)
+    print(f"Usage: python {sys.argv[0]} [-s start] dir", file=sys.stderr)
     sys.exit(1)
 
 def rename(dir, src, dst):
@@ -17,9 +21,9 @@ dir = args[0]
 files1 = os.listdir(dir)
 files1.sort(key=lambda x: os.path.getmtime(os.path.join(dir, x)))
 files2 = []
-for i, file in enumerate(files1):
+for file in files1:
     ext = os.path.splitext(file)[1]
-    new_name = f"{i+1:03}{ext}"
+    new_name = f"{start+len(files2):03}{ext}"
     tmp_name = "tmp-" + new_name
     files2.append((file, tmp_name, new_name))
     rename(dir, file, tmp_name)
