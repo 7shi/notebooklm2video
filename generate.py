@@ -62,7 +62,7 @@ if not table1[0][1]:
 # Add the ending screen if the last entry is not it
 if "".join(table1[-1][1:]):
     import wave
-    with wave.open("src.wav", 'rb') as wf:
+    with wave.open(audio1, 'rb') as wf:
         t1s = wf.getnframes() // wf.getframerate()
     r = [""] * len(table1[0])
     r[0] = f"{t1s // 60}:{t1s % 60:02d}"
