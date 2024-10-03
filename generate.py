@@ -68,6 +68,7 @@ if "".join(table1[-1][1:]):
     r[0] = f"{t1s // 60}:{t1s % 60:02d}"
     table1.append(r)
 
+not_found = False
 for j, (_, t2, _, _) in enumerate(table2):
     if (t2s := parse_time(t2, " in table2")) is None:
         continue
@@ -84,7 +85,11 @@ for j, (_, t2, _, _) in enumerate(table2):
         i += 1
     if not found:
         print("Not found:", t2)
-        break
+        not_found = True
+if not_found:
+    print("ERROR: Please check `log2.md` and `table1.txt`, and fix `table2.txt`.")
+    import sys
+    sys.exit(1)
 
 with open("table.js", "w") as f1:
     print("const table = [", file=f1)
