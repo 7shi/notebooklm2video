@@ -56,7 +56,10 @@ i = 1
 
 # Determine if the first entry is a title based on the speaker column
 if table1[0][1]:
-    table1.insert(0, [""] * len(table1[0]))
+    r = [""] * len(table1[0])
+    r[0] = "00:00"
+    table1.insert(0, r)
+    print("Please add the title to the first entry in `table1.txt`.")
 
 # Add the ending screen if the last entry is not it
 if "".join(table1[-1][1:]):
