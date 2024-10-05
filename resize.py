@@ -32,9 +32,10 @@ def resize_and_crop(input_path, output_path, width, height):
 if not dstdir.exists():
     dstdir.mkdir(parents=True)
 
-images = sorted(srcdir.glob("*.png"))
+images = sorted(srcdir.glob("*"))
 for i, image in enumerate(images):
-    input_image  = str(image)
-    output_image = str(dstdir / image.name)
-    print(f"{i+1}/{len(images)}: {input_image} -> {output_image}")
-    resize_and_crop(input_image, output_image, width, height)
+    if image.suffix.lower() in [".png", ".jpg", ".jpeg"]:
+        input_image  = str(image)
+        output_image = str(dstdir / (image.stem + ".png"))
+        print(f"{i+1}/{len(images)}: {input_image} -> {output_image}")
+        resize_and_crop(input_image, output_image, width, height)
