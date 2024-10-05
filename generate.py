@@ -139,7 +139,7 @@ with open(makef, "w") as f1:
         dst_v.append(dst)
     print(file=f1)
     print("DST_V =", *dst_v, file=f1)
-    dst_a = [f"{mp4out}/_5.wav", audio2, f"{mp4out}/_2.wav"]
+    dst_a = [f"{mp4out}/_5.wav", audio2, f"{mp4out}/_1.wav"]
     print("DST_A =", *dst_a, file=f1)
     print(f"""
 {flistv}:
@@ -157,8 +157,8 @@ with open(makef, "w") as f1:
 {mp4out}/_5.wav:
 \tffmpeg -f lavfi -i anullsrc=r=44100:cl=mono -t 5 -q:a 9 -acodec pcm_s16le $@
 
-{mp4out}/_2.wav:
-\tffmpeg -f lavfi -i anullsrc=r=44100:cl=mono -t 2 -q:a 9 -acodec pcm_s16le $@
+{mp4out}/_1.wav:
+\tffmpeg -f lavfi -i anullsrc=r=44100:cl=mono -t 1 -q:a 9 -acodec pcm_s16le $@
 
 {tempa}: {flista} $(DST_A)
 \trm -f $@ && ffmpeg -f concat -i $< -c:a aac $@
