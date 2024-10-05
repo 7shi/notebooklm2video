@@ -126,7 +126,8 @@ with open(makef, "w") as f1:
         src = f"{imgsrc}/{fn}.png"
         dst = f"{mp4out}/{fn}.mp4"
         print(f"{dst}: {src}", file=f1)
-        print(f"\tmkdir -p {mp4out} && rm -f $@ && ffmpeg -loop 1 -i $< -c:v libx264 -t {dur} -pix_fmt yuv420p $@", file=f1)
+        dur_s = f"{dur:.2f}".rstrip("0").rstrip(".")
+        print(f"\tmkdir -p {mp4out} && rm -f $@ && ffmpeg -loop 1 -i $< -c:v libx264 -t {dur_s} -pix_fmt yuv420p $@", file=f1)
         dst_v.append(dst)
     print(file=f1)
     print("DST_V =", *dst_v, file=f1)
