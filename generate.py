@@ -51,13 +51,12 @@ def parse_time(t, loc="", use_float=False):
     print(f"Error{loc}: {t}")
     return None
 
-imgs = {}
-i = 0
+imgs = { 0: f"{srcdir}/001.png" }
+i = 1
 
 # Determine if the first entry is a title based on the speaker column
-if not table1[0][1]:
-    imgs[0] = f"{srcdir}/001.png"
-    i = 1
+if table1[0][1]:
+    table1.insert(0, [""] * len(table1[0]))
 
 # Add the ending screen if the last entry is not it
 if "".join(table1[-1][1:]):
