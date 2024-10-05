@@ -94,7 +94,11 @@ if not_found:
 with open("table.js", "w") as f1:
     print("const table = [", file=f1)
     img = f"{srcdir}/001.png"
-    for i, (_, _, en, ja, det) in enumerate(table1):
+    for i, row in enumerate(table1):
+        if len(row) != 5:
+            print("ERROR:", row)
+            continue
+        en, ja, det = row[2:]
         if i in imgs:
             img = imgs[i]
         det = det.replace("。", "。 ")
