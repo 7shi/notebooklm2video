@@ -65,9 +65,11 @@ if table1[0][1]:
 if "".join(table1[-1][1:]):
     import wave
     with wave.open(audio1, 'rb') as wf:
-        t1s = wf.getnframes() // wf.getframerate()
+        t1s = wf.getnframes() / wf.getframerate()
+    t1sm = int(t1s / 60)
+    t1ss = t1s - t1sm * 60
     r = [""] * len(table1[0])
-    r[0] = f"{t1s // 60}:{t1s % 60:02d}"
+    r[0] = f"{t1sm}:{t1ss:05.2f}"
     table1.append(r)
 
 not_found = False
