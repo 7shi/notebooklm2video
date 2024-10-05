@@ -1,4 +1,8 @@
-import re
+import sys, re
+
+adjust = 0
+if len(sys.argv) == 3 and sys.argv[1] == "-a":
+    adjust = int(sys.argv[2])
 
 def make_table(filename):
     with open(filename, "r") as f:
@@ -92,7 +96,6 @@ for j, (_, t2, _, _) in enumerate(table2):
         not_found = True
 if not_found:
     print("ERROR: Please check `log2.md` and `table1.txt`, and fix `table2.txt`.")
-    import sys
     sys.exit(1)
 
 with open("table.js", "w") as f1:
@@ -129,14 +132,24 @@ with open(makef, "w") as f1:
     print(f"all: {output}", file=f1)
     print(file=f1)
     dst_v = []
+    count = 0
+    minus = 0
     for i, dur in enumerate(durs):
         fn = f"{i+1:03d}"
         src = f"{imgsrc}/{fn}.png"
         dst = f"{mp4out}/{fn}.mp4"
         print(f"{dst}: {src}", file=f1)
+        if adjust and dur >= 1.0:
+            count += 1
+            if count >= adjust:
+                dur -= 0.1
+                count = 0
+                minus += 1
         dur_s = f"{dur:.2f}".rstrip("0").rstrip(".")
         print(f"\tmkdir -p {mp4out} && rm -f $@ && ffmpeg -loop 1 -i $< -c:v libx264 -t {dur_s} -pix_fmt yuv420p $@", file=f1)
         dst_v.append(dst)
+    if adjust:
+        print("adjust:", minus / 10)
     print(file=f1)
     print("DST_V =", *dst_v, file=f1)
     dst_a = [f"{mp4out}/_5.wav", audio2, f"{mp4out}/_1.wav"]
