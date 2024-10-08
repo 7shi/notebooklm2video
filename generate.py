@@ -29,6 +29,7 @@ table1 = make_table("table1.txt")
 table2 = make_table("table2.txt")
 write_text("text-en.txt", table1, 2)
 write_text("text-ja.txt", table1, 3)
+write_text("images.txt",  table2, 3)
 
 makef  = "Makefile"
 audio1 = "src.wav"
