@@ -2,7 +2,11 @@ import sys, re
 
 adjust = 0
 if len(sys.argv) == 3 and sys.argv[1] == "-a":
-    adjust = int(sys.argv[2])
+    adjust_s = sys.argv[2]
+    if "." in adjust_s:
+        adjust = float(adjust_s)
+    else:
+        adjust = int(adjust_s)
 
 def make_table(filename):
     with open(filename, "r") as f:
@@ -135,6 +139,7 @@ with open(makef, "w") as f1:
     dst_v = []
     count = 0
     minus = 0
+    adcnt = adjust
     for i, dur in enumerate(durs):
         fn = f"{i+1:03d}"
         src = f"{imgsrc}/{fn}.png"
@@ -142,10 +147,10 @@ with open(makef, "w") as f1:
         print(f"{dst}: {src}", file=f1)
         if adjust and dur >= 1.0:
             count += 1
-            if count >= adjust:
+            if count >= adcnt:
                 dur -= 0.1
-                count = 0
                 minus += 1
+                adcnt += adjust
         dur_s = f"{dur:.2f}".rstrip("0").rstrip(".")
         print(f"\tmkdir -p {mp4out} && rm -f $@ && ffmpeg -loop 1 -i $< -c:v libx264 -t {dur_s} -pix_fmt yuv420p $@", file=f1)
         dst_v.append(dst)
