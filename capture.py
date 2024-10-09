@@ -1,8 +1,26 @@
-import os, time, pyautogui
+import sys, os, time, pyautogui
 import numpy as np
 
 mx, my = 526, 864
 rect = (80, 226, 800, 600)
+
+p = 1
+c = -1
+args = sys.argv[1:]
+try:
+    while args:
+        if args[0] == "-s":
+            p = int(args[1])
+            args = args[2:]
+        elif args[0] == "-c":
+            c = int(args[1])
+            args = args[2:]
+        else:
+            raise Exception(f"unknown: {args[0]}")
+except Exception as e:
+    print(e, file=sys.stderr)
+    print(f"Usage: python {sys.argv[0]} [-s start] [-c count]", file=sys.stderr)
+    sys.exit(1)
 
 outdir = "dst2"
 if not os.path.exists(outdir):
@@ -32,13 +50,13 @@ def fix_text(text):
             ret += "\n"
     return ret
 
-p = 1
 ok = True
-while ok:
+while ok and c != 0:
     print(p)
     img = pyautogui.screenshot(region=rect)
     img.save(f"{outdir}/{p:03d}.png")
     p += 1
+    c -= 1
     p1 = pyautogui.screenshot(region=rect)
     ok = False
     for i in range(3):
