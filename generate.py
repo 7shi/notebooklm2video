@@ -1,12 +1,27 @@
-import sys, re
+import sys, os, re
 
 adjust = 0
-if len(sys.argv) == 3 and sys.argv[1] == "-a":
-    adjust_s = sys.argv[2]
-    if "." in adjust_s:
-        adjust = float(adjust_s)
-    else:
-        adjust = int(adjust_s)
+args = []
+if os.path.exists(opt := "generate.txt"):
+    with open(opt, "r") as f:
+        args = f.read().strip().split()
+args += sys.argv[1:]
+try:
+    while args:
+        if args[0] == "-a":
+            adjust_s = args[1]
+            if "." in adjust_s:
+                adjust = float(adjust_s)
+            else:
+                adjust = int(adjust_s)
+            args = args[2:]
+        else:
+            raise Exception(f"unknown: {args[0]}")
+except Exception as e:
+    print(e, file=sys.stderr)
+    print(f"Usage: python {sys.argv[0]} [-a adjust]", file=sys.stderr)
+    print("Options can also be specified in `generate.txt`.", file=sys.stderr)
+    sys.exit(1)
 
 def make_table(filename):
     with open(filename, "r") as f:
