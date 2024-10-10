@@ -37,6 +37,6 @@ time:
 	for f in dst3-v.mp4 dst3-a1.wav dst4.mp4; do (ffprobe $$f 2>&1 | grep Duration); done
 
 cut:
-	ffmpeg -i dst4.mp4 -ss 00:00:02 -to 00:02:02 dst4-cut.mp4
+	ffmpeg -i dst4.mp4 -ss 00:00:02 -to 00:02:02 -y dst4-cut.mp4
 
 .PHONY: all mp3 convert1 convert2 extract check rename resize generate capture time cut

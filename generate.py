@@ -167,7 +167,7 @@ with open(makef, "w") as f1:
                 minus += 1
                 adcnt += adjust
         dur_s = f"{dur:.2f}".rstrip("0").rstrip(".")
-        print(f"\tmkdir -p {mp4out} && rm -f $@ && ffmpeg -loop 1 -i $< -c:v libx264 -t {dur_s} -pix_fmt yuv420p $@", file=f1)
+        print(f"\tmkdir -p {mp4out} && ffmpeg -loop 1 -i $< -c:v libx264 -t {dur_s} -pix_fmt yuv420p -y $@", file=f1)
         dst_v.append(dst)
     if adjust:
         print("adjust:", minus / 10)
@@ -180,7 +180,7 @@ with open(makef, "w") as f1:
 \tfor dst in $(DST_V); do echo file \\'$$dst\\'; done > $@
 
 {tempv}: {flistv} $(DST_V)
-\trm -f $@ && ffmpeg -f concat -i $< -c copy $@
+\tffmpeg -f concat -i $< -c copy -y $@
 
 {audio2}: {audio1}
 \tffmpeg -i $< -ar 44100 -ac 1 -c:a pcm_s16le $@
@@ -195,10 +195,10 @@ with open(makef, "w") as f1:
 \tffmpeg -f lavfi -i anullsrc=r=44100:cl=mono -t 1 -q:a 9 -acodec pcm_s16le $@
 
 {tempa}: {flista} $(DST_A)
-\trm -f $@ && ffmpeg -f concat -i $< -c:a aac $@
+\tffmpeg -f concat -i $< -c:a aac -y $@
 
 {output}: {tempv} {tempa}
-\trm -f $@ && ffmpeg -i {tempv} -i {tempa} -c:v copy -c:a copy -shortest $@
+\tffmpeg -i {tempv} -i {tempa} -c:v copy -c:a copy -shortest -y $@
 
 clean:
 \trm -rf {mp4out} {flistv} {tempv} {audio2} {flista} {tempa} {output}
